@@ -1,0 +1,30 @@
+isi image untuk raspberry pi
+/configure raspberry pi
+//set static ip eth0
+auto eth0
+iface eth0 inet static
+address 192.168.1.33
+//set hw address tiap interface
+allow-hotplug eth2
+iface eth2 inet dhcp
+hwaddress ether 00:00:00:00:42:02
+
+
+
+/Proses install openvswitch
+sudo apt-get update
+sudo apt-get install openvswitch-switch
+sudo apt-get install openvswitch-common bridge-utils
+
+//check hasil instalasi
+sudo ovs-vsctl show
+
+//menambahkan bridge
+sudo ovs-vsctl add-br s1
+
+
+menambahkan port
+sudo ovs-vsctl add-port s1 eth1
+
+
+sudo ovs-vsctl set-controller s1 tcp:192.168.1.10:6633
